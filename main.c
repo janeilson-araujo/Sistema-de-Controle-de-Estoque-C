@@ -6,10 +6,14 @@
 #define DIAS 7
 
 int estoque[PRODUTOS][DIAS];
-char dias_semana[DIAS][4] = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"};
+char dias_semana[DIAS][8] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado", "Domingo"};
 
 void cadatrarEstoque()
 {
+    system("clear");
+    printf("\n========================================\n");
+    printf(" CADASTRO DE ESTOQUE\n");
+    printf("========================================\n");
 
     for (int i = 0; i < PRODUTOS; i++)
     {
@@ -51,12 +55,15 @@ void cadatrarEstoque()
 
 void exibirEstoque()
 {
+    system("clear");
+    printf("\n========================================\n");
+    printf(" EXIBIR ESTOQUE\n");
+    printf("========================================\n");
 
     printf("           ");
-
     for (int i = 0; i < DIAS; i++)
     {
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < 3; j++)
         {
             printf("%c", dias_semana[i][j]);
         }
@@ -86,6 +93,11 @@ void exibirEstoque()
 
 void calcularEstoqueTotalPorProduto()
 {
+    system("clear");
+    printf("\n========================================\n");
+    printf(" Calcular Total de Estoque por Produto\n");
+    printf("========================================\n");
+
     int total_por_produto;
 
     for (int i = 0; i < PRODUTOS; i++)
@@ -93,7 +105,7 @@ void calcularEstoqueTotalPorProduto()
         total_por_produto = 0;
         for (int j = 0; j < DIAS; j++)
         {
-            total_por_produto += estoque[i][j];
+            total_por_produto = total_por_produto + estoque[i][j];
         }
         printf("\nProduto %d: %d unidades", i + 1, total_por_produto);
     }
@@ -105,14 +117,30 @@ void calcularEstoqueTotalPorProduto()
 
 void calcularEstoqueTotaPorDia()
 {
+    system("clear");
+    printf("\n========================================\n");
+    printf(" Calcular Total de Estoque por Dia\n");
+    printf("========================================\n");
+
     int total_por_dia;
 
     for (int i = 0; i < DIAS; i++)
     {
+
+        total_por_dia = 0;
+
         for (int j = 0; j < PRODUTOS; j++)
         {
-            total_por_dia += estoque[j][i];
+            total_por_dia = total_por_dia + estoque[j][i];
         }
+
+        for (int j = 0; j < 8; j++)
+        {
+            printf("%c", dias_semana[i][j]);
+        }
+        printf(":");
+        printf(" %d unidades", total_por_dia);
+        printf("\n");
     }
     printf("\n");
 
@@ -160,34 +188,18 @@ int main()
         switch (opcao)
         {
         case 1:
-
-            printf("\n========================================\n");
-            printf(" CADASTRO DE ESTOQUE\n");
-            printf("========================================\n");
             cadatrarEstoque();
             break;
 
         case 2:
-
-            printf("\n========================================\n");
-            printf(" EXIBIR ESTOQUE\n");
-            printf("========================================\n");
             exibirEstoque();
             break;
 
         case 3:
-
-            printf("\n========================================\n");
-            printf(" Calcular Total de Estoque por Produto\n");
-            printf("========================================\n");
             calcularEstoqueTotalPorProduto();
             break;
 
         case 4:
-
-            printf("\n========================================\n");
-            printf(" Calcular Total de Estoque por Dia\n");
-            printf("========================================\n");
             calcularEstoqueTotaPorDia();
             break;
 
