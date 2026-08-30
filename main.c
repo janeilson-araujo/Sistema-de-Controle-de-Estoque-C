@@ -49,7 +49,7 @@ void cadatrarEstoque()
     }
 
     printf("\nEstoque cadastrado com sucesso!");
-    printf("\nAperte enter para fechar: ");
+    printf("\n\nAperte enter para fechar: ");
     scanf("%*c");
 }
 
@@ -87,7 +87,7 @@ void exibirEstoque()
         }
     }
 
-    printf("\nAperte enter para fechar: ");
+    printf("\n\nAperte enter para fechar: ");
     scanf("%*c");
 }
 
@@ -109,9 +109,8 @@ void calcularEstoqueTotalPorProduto()
         }
         printf("\nProduto %d: %d unidades", i + 1, total_por_produto);
     }
-    printf("\n");
 
-    printf("\nAperte enter para fechar: ");
+    printf("\n\nAperte enter para fechar: ");
     scanf("%*c");
 }
 
@@ -143,8 +142,7 @@ void calcularEstoqueTotaPorDia()
         printf("\n");
     }
 
-    printf("\n");
-    printf("\nAperte enter para fechar: ");
+    printf("\n\nAperte enter para fechar: ");
     scanf("%*c");
 }
 
@@ -176,8 +174,7 @@ void produtoComMaiorEstoque()
 
     printf("\nProduto com maior estoque:\nProduto %d\n\nQuantidade total:\n%d unidades", produto_maior_estoque + 1, produto_maior_estoque_valor);
 
-    printf("\n");
-    printf("\nAperte enter para fechar: ");
+    printf("\n\nAperte enter para fechar: ");
     scanf("%*c");
 }
 
@@ -210,14 +207,44 @@ void diaComMaiorEstoque()
     }
 
     printf("\nDia com maior estoque:\n");
-    for(int j = 0; j < 8; j++)
+    for (int j = 0; j < 8; j++)
     {
         printf("%c", dias_semana[dia_maior_estoque][j]);
     }
     printf("\n\nQuantidade total:\n%d unidades", dia_maior_estoque_valor);
 
-    printf("\n");
-    printf("\nAperte enter para fechar: ");
+    printf("\n\nAperte enter para fechar: ");
+    scanf("%*c");
+}
+
+void alertarEstoqueBaixo()
+{
+    system("clear");
+    printf("\n========================================\n");
+    printf(" Produtos com Estoque Baixo\n");
+    printf("========================================\n");
+    
+    int limite_estoque_baixo;
+    int total_por_produto;
+
+    printf("\nInforme o limite de estoque: ");
+    scanf("%d", &limite_estoque_baixo);
+    while (getchar() != '\n')
+
+    for(int i = 0; i < PRODUTOS; i++){
+        for(int j = 0; j < DIAS; j++){
+            if(estoque[i][j] < limite_estoque_baixo){
+                printf("\nProduto %d - ", i + 1);
+                for (int k = 0; k < 8; k++)
+                {
+                    printf("%c", dias_semana[j][k]);
+                }
+                printf(": %d unidades", estoque[i][j]);
+            }
+        }
+    }
+
+    printf("\n\nAperte enter para fechar: ");
     scanf("%*c");
 }
 
@@ -277,18 +304,15 @@ int main()
             break;
 
         case 5:
-
             produtoComMaiorEstoque();
             break;
 
         case 6:
-
             diaComMaiorEstoque();
             break;
 
         case 7:
-
-            printf("\nFuncionalidade ainda nao implementada.\n");
+            alertarEstoqueBaixo();
             break;
 
         case 0:
