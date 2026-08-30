@@ -86,16 +86,33 @@ void exibirEstoque()
 
 void calcularEstoqueTotalPorProduto()
 {
-    int total_produto;
+    int total_por_produto;
 
     for (int i = 0; i < PRODUTOS; i++)
     {
-        total_produto = 0;
+        total_por_produto = 0;
         for (int j = 0; j < DIAS; j++)
         {
-            total_produto += estoque[i][j];
+            total_por_produto += estoque[i][j];
         }
-        printf("\nProduto %d: %d unidades", i + 1, total_produto);
+        printf("\nProduto %d: %d unidades", i + 1, total_por_produto);
+    }
+    printf("\n");
+
+    printf("\nAperte enter para fechar: ");
+    scanf("%*c");
+}
+
+void calcularEstoqueTotaPorDia()
+{
+    int total_por_dia;
+
+    for (int i = 0; i < DIAS; i++)
+    {
+        for (int j = 0; j < PRODUTOS; j++)
+        {
+            total_por_dia += estoque[j][i];
+        }
     }
     printf("\n");
 
@@ -168,7 +185,10 @@ int main()
 
         case 4:
 
-            printf("\nFuncionalidade ainda nao implementada.\n");
+            printf("\n========================================\n");
+            printf(" Calcular Total de Estoque por Dia\n");
+            printf("========================================\n");
+            calcularEstoqueTotaPorDia();
             break;
 
         case 5:
