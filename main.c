@@ -10,6 +10,7 @@ char dias_semana[DIAS][4] = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"};
 
 void cadatrarEstoque()
 {
+
     for (int i = 0; i < PRODUTOS; i++)
     {
         printf("\nProduto %d\n", i + 1);
@@ -50,7 +51,9 @@ void cadatrarEstoque()
 
 void exibirEstoque()
 {
+
     printf("           ");
+
     for (int i = 0; i < DIAS; i++)
     {
         for (int j = 0; j < 4; j++)
@@ -76,6 +79,25 @@ void exibirEstoque()
             }
         }
     }
+
+    printf("\nAperte enter para fechar: ");
+    scanf("%*c");
+}
+
+void calcularEstoqueTotalPorProduto()
+{
+    int total_produto;
+
+    for (int i = 0; i < PRODUTOS; i++)
+    {
+        total_produto = 0;
+        for (int j = 0; j < DIAS; j++)
+        {
+            total_produto += estoque[i][j];
+        }
+        printf("\nProduto %d: %d unidades", i + 1, total_produto);
+    }
+    printf("\n");
 
     printf("\nAperte enter para fechar: ");
     scanf("%*c");
@@ -138,7 +160,10 @@ int main()
 
         case 3:
 
-            printf("\nFuncionalidade ainda nao implementada.\n");
+            printf("\n========================================\n");
+            printf(" Calcular Total de Estoque por Produto\n");
+            printf("========================================\n");
+            calcularEstoqueTotalPorProduto();
             break;
 
         case 4:
