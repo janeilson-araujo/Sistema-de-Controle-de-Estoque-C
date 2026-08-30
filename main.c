@@ -1,11 +1,12 @@
 #include <stdio.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 #define PRODUTOS 5
 #define DIAS 7
 
 int estoque[PRODUTOS][DIAS];
+char dias_semana[DIAS][4] = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"};
 
 void cadatrarEstoque()
 {
@@ -41,22 +42,42 @@ void cadatrarEstoque()
             scanf("%d", &estoque[i][j]);
         }
     }
-    printf("\nEstoque cadastrado com sucesso!\n");
+
+    printf("\nEstoque cadastrado com sucesso!");
+    printf("\nAperte enter para fechar: ");
+    scanf("%*c");
 }
 
 void exibirEstoque()
 {
-    for (int i = 0; i < PRODUTOS; i++)
+    printf("           ");
+    for (int i = 0; i < DIAS; i++)
     {
-        printf("Produto %d:\n", i + 1);
-        for (int j = 0; j < DIAS; j++)
+        for (int j = 0; j < 4; j++)
         {
-            printf("Dia %d: %d", j + 1, estoque[i][j]);
+            printf("%c", dias_semana[i][j]);
         }
-        printf("\n");
+        printf(" ");
     }
 
-    printf("Aperte enter para fechar: ");
+    for (int i = 0; i < PRODUTOS; i++)
+    {
+        printf("\n");
+        printf("Produto %d:  ", i + 1);
+        for (int j = 0; j < DIAS; j++)
+        {
+            if (estoque[i][j] < 10)
+            {
+                printf("%d   ", estoque[i][j]);
+            }
+            else if (estoque[i][j] < 100)
+            {
+                printf("%d  ", estoque[i][j]);
+            }
+        }
+    }
+
+    printf("\nAperte enter para fechar: ");
     scanf("%*c");
 }
 
@@ -66,7 +87,7 @@ int main()
 
     while (true)
     {
-
+        system("clear");
         printf("\n========================================\n");
         printf(" SISTEMA DE CONTROLE DE ESTOQUE\n");
         printf("========================================\n");
@@ -144,9 +165,8 @@ int main()
 
             printf("\nEncerrando o sistema...\n");
             exit(0);
-
         }
-
-        return 0;
     }
+
+    return 0;
 }
