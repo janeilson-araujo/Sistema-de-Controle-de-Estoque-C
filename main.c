@@ -1,27 +1,72 @@
 #include <stdio.h>
+#include <stdio.h>
+#include <stdbool.h>
+
 #define PRODUTOS 5
 #define DIAS 7
 
 int estoque[PRODUTOS][DIAS];
 
-void exibirestoque()
+void cadatrarEstoque()
 {
     for (int i = 0; i < PRODUTOS; i++)
     {
+        printf("\nProduto %d\n", i + 1);
         for (int j = 0; j < DIAS; j++)
         {
-            printf("Produto %d, Dia %d: %d\n", i + 1, j + 1, estoque[i][j]);
+            switch (j)
+            {
+            case 0:
+                printf("Segunda-feira: ");
+                break;
+            case 1:
+                printf("Terca-feira: ");
+                break;
+            case 2:
+                printf("Quarta-feira: ");
+                break;
+            case 3:
+                printf("Quinta-feira: ");
+                break;
+            case 4:
+                printf("Sexta-feira: ");
+                break;
+            case 5:
+                printf("Sabado: ");
+                break;
+            case 6:
+                printf("Domingo: ");
+                break;
+            }
+            scanf("%d", &estoque[i][j]);
         }
     }
+    printf("\nEstoque cadastrado com sucesso!\n");
+}
+
+void exibirEstoque()
+{
+    for (int i = 0; i < PRODUTOS; i++)
+    {
+        printf("Produto %d:\n", i + 1);
+        for (int j = 0; j < DIAS; j++)
+        {
+            printf("Dia %d: %d", j + 1, estoque[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("Aperte enter para fechar: ");
+    scanf("%*c");
 }
 
 int main()
 {
-
     int opcao;
-    int i, j;
-    do
+
+    while (true)
     {
+
         printf("\n========================================\n");
         printf(" SISTEMA DE CONTROLE DE ESTOQUE\n");
         printf("========================================\n");
@@ -35,7 +80,23 @@ int main()
         printf("0 - Sair\n");
         printf("========================================\n");
         printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
+
+        do
+        {
+            int leitura_sucesso;
+
+            printf("Digite sua opção: ");
+
+            leitura_sucesso = scanf("%d", &opcao);
+            while (getchar() != '\n')
+                ;
+            if (opcao < 0 || opcao > 7 || leitura_sucesso != 1)
+            {
+                printf("Opção inválida. Por favor, digite um número entre 0 e 7.\n");
+            }
+
+        } while (opcao < 0 || opcao > 7);
+
         switch (opcao)
         {
         case 1:
@@ -43,67 +104,49 @@ int main()
             printf("\n========================================\n");
             printf(" CADASTRO DE ESTOQUE\n");
             printf("========================================\n");
-            for (i = 0; i < PRODUTOS; i++)
-            {
-                printf("\nProduto %d\n", i + 1);
-                for (j = 0; j < DIAS; j++)
-                {
-                    switch (j)
-                    {
-                    case 0:
-                        printf("Segunda-feira: ");
-                        break;
-                    case 1:
-                        printf("Terca-feira: ");
-                        break;
-                    case 2:
-                        printf("Quarta-feira: ");
-                        break;
-                    case 3:
-                        printf("Quinta-feira: ");
-                        break;
-                    case 4:
-                        printf("Sexta-feira: ");
-                        break;
-                    case 5:
-                        printf("Sabado: ");
-                        break;
-                    case 6:
-                        printf("Domingo: ");
-                        break;
-                    }
-                    scanf("%d", &estoque[i][j]);
-                }
-            }
-            printf("\nEstoque cadastrado com sucesso!\n");
+            cadatrarEstoque();
             break;
+
         case 2:
+
             printf("\n========================================\n");
             printf(" EXIBIR ESTOQUE\n");
             printf("========================================\n");
             exibirEstoque();
             break;
+
         case 3:
+
             printf("\nFuncionalidade ainda nao implementada.\n");
             break;
+
         case 4:
+
             printf("\nFuncionalidade ainda nao implementada.\n");
             break;
+
         case 5:
+
             printf("\nFuncionalidade ainda nao implementada.\n");
             break;
+
         case 6:
+
             printf("\nFuncionalidade ainda nao implementada.\n");
             break;
+
         case 7:
+
             printf("\nFuncionalidade ainda nao implementada.\n");
             break;
+
         case 0:
+
             printf("\nEncerrando o sistema...\n");
-            break;
-        default:
-            printf("\nOpcao invalida!\n");
+            exit(0);
+
         }
-    } while (opcao != 0);
-    return 0;
+
+        return 0;
+    }
 }
