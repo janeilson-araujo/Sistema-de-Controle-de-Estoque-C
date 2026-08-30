@@ -142,8 +142,41 @@ void calcularEstoqueTotaPorDia()
         printf(" %d unidades", total_por_dia);
         printf("\n");
     }
-    printf("\n");
 
+    printf("\n");
+    printf("\nAperte enter para fechar: ");
+    scanf("%*c");
+}
+
+void produtoComMaiorEstoque()
+{
+    system("clear");
+    printf("\n========================================\n");
+    printf(" Produto com Maior Estoque\n");
+    printf("========================================\n");
+
+    int produto_maior_estoque = 0;
+    int produto_maior_estoque_valor = 0;
+    int total_por_produto;
+
+    for (int i = 0; i < PRODUTOS; i++)
+    {
+        total_por_produto = 0;
+        for (int j = 0; j < DIAS; j++)
+        {
+            total_por_produto = total_por_produto + estoque[i][j];
+        }
+
+        if (produto_maior_estoque_valor <= total_por_produto)
+        {
+            produto_maior_estoque_valor = total_por_produto;
+            produto_maior_estoque = i;
+        }
+    }
+
+    printf("\nProduto com maior estoque:\nProduto %d\n\nQuantidade total:\n%d unidades", produto_maior_estoque + 1, produto_maior_estoque_valor);
+
+    printf("\n");
     printf("\nAperte enter para fechar: ");
     scanf("%*c");
 }
@@ -205,7 +238,7 @@ int main()
 
         case 5:
 
-            printf("\nFuncionalidade ainda nao implementada.\n");
+            produtoComMaiorEstoque();
             break;
 
         case 6:
